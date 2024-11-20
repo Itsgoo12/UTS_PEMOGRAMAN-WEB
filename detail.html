@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Hewan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f4f4, #b2bec3);
+            color: #333;
+        }
+        header {
+            background: linear-gradient(to right, #2d3436, #636e72);
+            color: white;
+        }
+        footer {
+            background: #2d3436;
+            color: #b2bec3;
+        }
+        .card {
+            background: #dfe6e9;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="py-3 text-center">
+        <h1 id="title">Detail Hewan</h1>
+    </header>
+    <main class="container my-4">
+        <div class="card shadow text-center">
+            <img id="image" src="" class="card-img-top" alt="Hewan" style="max-height: 300px; object-fit: cover;">
+            <div class="card-body">
+                <h5 class="card-title" id="name">Nama Hewan</h5>
+                <p class="card-text" id="description">Deskripsi Hewan</p>
+                <ul class="list-group list-group-flush" id="details">
+                    <!-- Detail akan dimasukkan di sini -->
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="menu.html" class="btn btn-secondary">Kembali ke Menu</a>
+        </div>
+    </main>
+    <footer class="text-center py-3">
+        <p>@Copyright by 22552011287_RAFFLES FIGOO_TIF 222 CNS</p>
+    </footer>
+    <script>
+        // Data hewan
+        const dataHewan = {
+            sapi: {
+                title: "Detail Sapi",
+                name: "Sapi Qurban",
+                description: "Kami menyediakan sapi qurban berkualitas dengan berat mulai dari 200 kg hingga 500 kg, yang sudah sesuai syariat Islam.",
+                image: "sapi.jpg",
+                details: [
+                    "Harga: Rp20.000.000 - Rp50.000.000",
+                    "Jenis: Limosin, Simental, Bali",
+                    "Kondisi: Sehat dan Layak Qurban"
+                ]
+            },
+            kambing: {
+                title: "Detail Kambing",
+                name: "Kambing Qurban",
+                description: "Kambing qurban tersedia dengan berbagai jenis dan ukuran, semuanya dalam kondisi sehat dan layak qurban.",
+                image: "kambing.jpg",
+                details: [
+                    "Harga: Rp2.500.000 - Rp5.000.000",
+                    "Jenis: Jawa, Etawa, Kacang",
+                    "Kondisi: Sehat dan Layak Qurban"
+                ]
+            },
+            domba: {
+                title: "Detail Domba",
+                name: "Domba Qurban",
+                description: "Domba dengan bulu lebat dan sehat, cocok untuk keperluan qurban Anda.",
+                image: "domba.jpg",
+                details: [
+                    "Harga: Rp3.000.000 - Rp6.000.000",
+                    "Jenis: Garut, Priangan",
+                    "Kondisi: Sehat dan Layak Qurban"
+                ]
+            }
+        };
+
+        // Ambil parameter dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const hewan = urlParams.get('hewan');
+
+        // Tampilkan data berdasarkan parameter
+        if (dataHewan[hewan]) {
+            const hewanData = dataHewan[hewan];
+            document.getElementById('title').textContent = hewanData.title;
+            document.getElementById('name').textContent = hewanData.name;
+            document.getElementById('description').textContent = hewanData.description;
+            document.getElementById('image').src = hewanData.image;
+
+            const detailsList = document.getElementById('details');
+            hewanData.details.forEach(detail => {
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item';
+                listItem.textContent = detail;
+                detailsList.appendChild(listItem);
+            });
+        } else {
+            document.querySelector('main').innerHTML = `
+                <div class="alert alert-danger text-center">
+                    <h5>Hewan tidak ditemukan!</h5>
+                    <p>Silakan kembali ke menu dan pilih hewan yang tersedia.</p>
+                    <a href="menu.html" class="btn btn-secondary mt-3">Kembali ke Menu</a>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
